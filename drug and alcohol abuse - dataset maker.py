@@ -14,7 +14,8 @@ school_types = ["Public", "Private"]
 substances = ["No Use", "Alcohol", "Drugs", "Alcohol and Drugs"]
 grades = np.random.randint(0, 101, size=data_size)
 family_income = np.random.randint(20000, 100001, size=data_size)
-bool_columns = [np.random.choice([0, 1], size=data_size).astype(bool) for _ in range(9)]
+bool_columns = [np.random.choice([0, 1], size=data_size).astype(bool) for _ in range(8)]
+criminal_record_values = np.random.choice([True, False], size=data_size, p=[0.9, 0.1])
 
 # Generate unique phone numbers
 phone_numbers = set()
@@ -34,12 +35,12 @@ data = {
     "Grades": grades,
     "Does_Sports": bool_columns[3],
     "In_Relationship": bool_columns[4],
-    "Criminal_Record": bool_columns[5],
+    "Criminal_Record": criminal_record_values,
     "Family_Income": family_income,
     "School_Type": [fake.random_element(school_types) for _ in range(data_size)],
-    "Parents_Substance_Abuse": bool_columns[6],
-    "Father_Educated": bool_columns[7],
-    "Mother_Educated": bool_columns[8]
+    "Parents_Substance_Abuse": bool_columns[5],
+    "Father_Educated": bool_columns[6],
+    "Mother_Educated": bool_columns[7]
 }
 
 df = pd.DataFrame(data)
