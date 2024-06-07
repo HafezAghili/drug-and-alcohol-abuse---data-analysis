@@ -11,7 +11,7 @@ data_size = 100000
 # Generate data
 countries = ["USA", "Canada", "UK", "Germany", "France", "Spain", "Italy", "Japan", "Australia", "Brazil"]
 school_types = ["Public", "Private"]
-substances = ["None", "Alcohol", "Drugs", "Alcohol and Drugs"]
+substances = ["No Use", "Alcohol", "Drugs", "Alcohol and Drugs"]
 grades = np.random.randint(0, 101, size=data_size)
 family_income = np.random.randint(20000, 100001, size=data_size)
 bool_columns = [np.random.choice([0, 1], size=data_size).astype(bool) for _ in range(9)]
@@ -47,7 +47,8 @@ df = pd.DataFrame(data)
 # Introducing some null values
 np.random.seed(0)
 for col in df.columns:
-    df.loc[df.sample(frac=0.05).index, col] = np.nan
+    if np.random.rand() > 0.2:  # 80% chance to add nulls
+        df.loc[df.sample(frac=np.random.uniform(0.001, 0.005)).index, col] = np.nan
 
 # Exporting to a CSV file
 file_path = "drug and alcohol abuse - dataset.csv"
